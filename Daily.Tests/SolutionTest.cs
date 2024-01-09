@@ -21,9 +21,7 @@ namespace Daily.Tests
         {
             var root = Logic.GetTreeNode(nums);
 
-            Assert.NotNull(root);
-
-            var res = Solution.RangeSumBST(root, low, high);
+            var res = Solution.RangeSumBST(root!, low, high);
 
             Assert.Equal(expected, res);
         }
@@ -35,6 +33,20 @@ namespace Daily.Tests
         public void TwoSum_Test(int[] nums, int target, int[] expected)
         {
             var res = Solution.TwoSum(nums, target);
+
+            Assert.Equal(expected, res);
+        }
+
+        [InlineData(new object?[] { 3, 5, 1, 6, 2, 9, 8, null, null, 7, 4 }, new object?[] { 3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8 }, true)]
+        [InlineData(new object?[] { 1, 2, 3 }, new object?[] { 1, 3, 2 }, false)]
+        [InlineData(new object?[] { 3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 11, null, null, 8, 10 }, new object?[] { 3, 5, 1, 6, 2, 9, 8, null, null, 7, 4 }, false)]
+        [Theory]
+        public void LeafSimilar_Test(object[] nums1, object[] nums2, bool expected)
+        {
+            var root1 = Logic.GetTreeNode(nums1);
+            var root2 = Logic.GetTreeNode(nums2);
+
+            var res = Solution.LeafSimilar(root1!, root2!);
 
             Assert.Equal(expected, res);
         }
