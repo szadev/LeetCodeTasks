@@ -1,6 +1,6 @@
 ﻿namespace Daily
 {
-    public class Solution
+    public static class Solution
     {
         #region Easy
         
@@ -106,7 +106,7 @@
         /// <param name="low"></param>
         /// <param name="high"></param>
         /// <returns></returns>
-        public static int RangeSumBST(TreeNode root, int low, int high)
+        public static int RangeSumBst(TreeNode root, int low, int high)
         {
             var sum = 0;
 
@@ -115,17 +115,37 @@
 
             if (root.left != null)
             {
-                sum += RangeSumBST(root.left, low, high);
+                sum += RangeSumBst(root.left, low, high);
             }
 
             if (root.right != null)
             {
-                sum += RangeSumBST(root.right, low, high);
+                sum += RangeSumBst(root.right, low, high);
             }
 
             return sum;
         }
 
+        /// <summary>
+        /// 1704. Determine if String Halves Are Alike
+        /// </summary>
+        /// <param name="s">string of even length</param>
+        /// <returns>Two strings are alike if they have the same number of vowels.
+        /// Return true if a and b are alike. Otherwise, return false.</returns>
+        public static bool HalvesAreAlike(string s) {
+            var number = 0;
+            var middle = s.Length / 2;
+            var vowels = new HashSet<char> { 'a', 'e', 'i', 'o', 'u' };
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (!vowels.Contains(char.ToLower(s[i]))) continue;
+                if (i + 1 <= middle)
+                    number++;
+                else number--;
+            }
+            return number is 0;
+        }
+        
         #endregion
 
         #region Medium

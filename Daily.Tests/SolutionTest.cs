@@ -21,7 +21,7 @@ namespace Daily.Tests
         {
             var root = Logic.GetTreeNode(nums);
 
-            var res = Solution.RangeSumBST(root!, low, high);
+            var res = Solution.RangeSumBst(root!, low, high);
 
             Assert.Equal(expected, res);
         }
@@ -48,6 +48,16 @@ namespace Daily.Tests
 
             var res = Solution.LeafSimilar(root1!, root2!);
 
+            Assert.Equal(expected, res);
+        }
+
+        [InlineData("book", true)]
+        [InlineData("textbook", false)]
+        [Theory]
+        public void HalvesAreAlike(string s, bool expected)
+        {
+            var res = Solution.HalvesAreAlike(s);
+            
             Assert.Equal(expected, res);
         }
     }
