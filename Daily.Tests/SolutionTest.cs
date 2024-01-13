@@ -67,9 +67,20 @@ namespace Daily.Tests
         [InlineData("book", true)]
         [InlineData("textbook", false)]
         [Theory]
-        public void HalvesAreAlike(string s, bool expected)
+        public void HalvesAreAlike_Test(string s, bool expected)
         {
             var res = Solution.HalvesAreAlike(s);
+            
+            Assert.Equal(expected, res);
+        }
+
+        [InlineData(new object?[] { 8,3,10,1,6,null,14,null,null,4,7,13 }, 7)]
+        [InlineData(new object?[] { 1,null,2,null,0,3}, 3)]
+        [Theory]
+        public void MaxAncestorDiff_Test(object[] nums, int expected)
+        {
+            var root = Logic.GetTreeNode(nums);
+            var res = Solution.MaxAncestorDiff(root!);
             
             Assert.Equal(expected, res);
         }

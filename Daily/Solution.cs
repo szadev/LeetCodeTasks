@@ -159,15 +159,15 @@
         public static int AmountOfTime(TreeNode root, int start)
         {
             var minutes = 0;
-            DFS(root, start);
+            Dfs(root, start);
             return minutes;
 
-            int DFS(TreeNode? node, int start)
+            int Dfs(TreeNode? node, int start)
             {
                 if (node == null) return 0;
 
-                var leftDepth = DFS(node.left, start);
-                var rightDepth = DFS(node.right, start);
+                var leftDepth = Dfs(node.left, start);
+                var rightDepth = Dfs(node.right, start);
 
                 if (node.val == start)
                 {
@@ -179,6 +179,72 @@
 
                 minutes = Math.Max(minutes, Math.Abs(leftDepth - rightDepth));
                 return Math.Min(leftDepth, rightDepth) - 1;
+            }
+        }
+
+        /// <summary>
+        /// 1026. Maximum Difference Between Node and Ancestor
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns>Given the root of a binary tree, return the maximum value v for
+        /// which there exist different nodes a and b
+        /// where v = |a.val - b.val| and a is an ancestor of b.</returns>
+        public static int MaxAncestorDiff(TreeNode root) {
+            var max = 0;
+            GetMaxMinValue(root);
+
+            return max;
+
+            int Substract(int anc, int desc)
+            {
+                return Math.Abs(anc - desc);
+            }
+
+            int GetMax(int anc, params int[] values){
+                var maxValue = 0;
+                foreach (var value in values)
+                {
+                    var sub = Substract(anc, value);
+                    if (sub > maxValue)
+                        maxValue = sub;
+                }
+                return maxValue;
+            }
+
+            // int[2] 0 - min, 1 - max
+            int[] GetMaxMinValue(TreeNode node)
+            {
+                var values = new int[2] {node.val,node.val};
+
+                if (node.left != null)
+                {
+                    var left = GetMaxMinValue(node.left);
+                
+                    if (left[0] < values[0])
+                        values[0] = left[0];
+                    if (left[1] > values[1])
+                        values[1] = left[1];
+                
+                    var diff = GetMax(node.val, left[0], left[1]);
+                    if (diff > max)
+                        max = diff;
+                }
+                
+                if (node.right != null)
+                {
+                    var right = GetMaxMinValue(node.right);
+                
+                    if (right[0] < values[0])
+                        values[0] = right[0];
+                    if (right[1] > values[1])
+                        values[1] = right[1];
+                
+                    var diff = GetMax(node.val, right[0], right[1]);
+                    if (diff > max)
+                        max = diff;
+                }
+
+                return values;
             }
         }
 

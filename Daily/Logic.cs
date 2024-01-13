@@ -1,27 +1,23 @@
 ﻿namespace Daily
 {
-    public class Logic
+    public static class Logic
     {
-        private static TreeNode? CreateTreeDFS(object[] data, int index, bool isPreviousNull)
+        private static TreeNode? CreateTreeDfs(object?[] data, int index, bool isPreviousNull, int shift)
         {
-            if (index >= data.Length)
+            if (index < 0 || index >= data.Length)
                 return null;
 
             var val = data[index];
             if (val == null) 
                 return null;
 
-            var leftId = (index + 1) * 2 - 1;
-            var rightId = (index + 1) * 2;
-
-            if (leftId >= data.Length && isPreviousNull)
+            if (isPreviousNull)
             {
-                leftId -= 2;
-                rightId -= 2;
+                shift++;
             }
-
-            var leftVal = CreateTreeDFS(data, leftId, false);
-            var rightVal = CreateTreeDFS(data, rightId, leftVal is null);
+            
+            var leftVal = CreateTreeDfs(data, (index + 1 - shift) * 2 - 1, isPreviousNull, shift);
+            var rightVal = CreateTreeDfs(data, (index + 1 - shift) * 2, leftVal is null, shift);
 
             return new TreeNode((int)val, leftVal, rightVal);
         }
@@ -31,9 +27,9 @@
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
-        public static TreeNode? GetTreeNode(object[] nums)
+        public static TreeNode? GetTreeNode(object?[] nums)
         {
-            return CreateTreeDFS(nums, 0, false);
+            return CreateTreeDfs(nums, 0, false, 0);
         }
     }
 }
