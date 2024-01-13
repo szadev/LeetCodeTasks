@@ -51,6 +51,19 @@ namespace Daily.Tests
             Assert.Equal(expected, res);
         }
 
+        [InlineData(new object?[] { 1, 5, 3, null, 4, 10, 6, 9, 2 }, 3, 4)]
+        [InlineData(new object?[] { 1 }, 1, 0)]
+        [InlineData(new object?[] { 1, 2, null, 3, null, 4, null, 5 }, 3, 2)]
+        [Theory]
+        public void AmountOfTime_Test(object[] nums, int start, int expected)
+        {
+            var root = Logic.GetTreeNode(nums);
+
+            var res = Solution.AmountOfTime(root!, start);
+
+            Assert.Equal(expected, res);
+        }
+
         [InlineData("book", true)]
         [InlineData("textbook", false)]
         [Theory]

@@ -150,6 +150,38 @@
 
         #region Medium
 
+        /// <summary>
+        /// 2385. Amount of Time for Binary Tree to Be Infected
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="start"></param>
+        /// <returns>Return the number of minutes needed for the entire tree to be infected.</returns>
+        public static int AmountOfTime(TreeNode root, int start)
+        {
+            var minutes = 0;
+            DFS(root, start);
+            return minutes;
+
+            int DFS(TreeNode? node, int start)
+            {
+                if (node == null) return 0;
+
+                var leftDepth = DFS(node.left, start);
+                var rightDepth = DFS(node.right, start);
+
+                if (node.val == start)
+                {
+                    minutes = Math.Max(leftDepth, rightDepth);
+                    return -1;
+                }
+                else if (leftDepth >= 0 && rightDepth >= 0)
+                    return Math.Max(leftDepth, rightDepth) + 1;
+
+                minutes = Math.Max(minutes, Math.Abs(leftDepth - rightDepth));
+                return Math.Min(leftDepth, rightDepth) - 1;
+            }
+        }
+
         #endregion
 
         #region Hard

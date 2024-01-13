@@ -1,22 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Daily
+﻿namespace Daily
 {
     public class Logic
     {
-        private static TreeNode? CreateTreeDFS(object[] data, int index)
+        private static TreeNode? CreateTreeDFS(object[] data, int index, bool isPreviousNull)
         {
-            if (index < 0 || index >= data.Length) return null;
+            if (index >= data.Length)
+                return null;
 
             var val = data[index];
-            if (val == null) return null;
+            if (val == null) 
+                return null;
 
-            return new TreeNode((int)val, CreateTreeDFS(data, (index + 1) * 2 - 1), CreateTreeDFS(data, (index + 1) * 2));
+            var leftId = (index + 1) * 2 - 1;
+            var rightId = (index + 1) * 2;
+
+            if (leftId >= data.Length && isPreviousNull)
+            {
+                leftId -= 2;
+                rightId -= 2;
+            }
+
+            var leftVal = CreateTreeDFS(data, leftId, false);
+            var rightVal = CreateTreeDFS(data, rightId, leftVal is null);
+
+            return new TreeNode((int)val, leftVal, rightVal);
         }
 
         /// <summary>
@@ -26,7 +33,7 @@ namespace Daily
         /// <returns></returns>
         public static TreeNode? GetTreeNode(object[] nums)
         {
-            return CreateTreeDFS(nums, 0);
+            return CreateTreeDFS(nums, 0, false);
         }
     }
 }
