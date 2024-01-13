@@ -151,38 +151,6 @@
         #region Medium
 
         /// <summary>
-        /// 2385. Amount of Time for Binary Tree to Be Infected
-        /// </summary>
-        /// <param name="root"></param>
-        /// <param name="start"></param>
-        /// <returns>Return the number of minutes needed for the entire tree to be infected.</returns>
-        public static int AmountOfTime(TreeNode root, int start)
-        {
-            var minutes = 0;
-            Dfs(root, start);
-            return minutes;
-
-            int Dfs(TreeNode? node, int start)
-            {
-                if (node == null) return 0;
-
-                var leftDepth = Dfs(node.left, start);
-                var rightDepth = Dfs(node.right, start);
-
-                if (node.val == start)
-                {
-                    minutes = Math.Max(leftDepth, rightDepth);
-                    return -1;
-                }
-                else if (leftDepth >= 0 && rightDepth >= 0)
-                    return Math.Max(leftDepth, rightDepth) + 1;
-
-                minutes = Math.Max(minutes, Math.Abs(leftDepth - rightDepth));
-                return Math.Min(leftDepth, rightDepth) - 1;
-            }
-        }
-
-        /// <summary>
         /// 1026. Maximum Difference Between Node and Ancestor
         /// </summary>
         /// <param name="root"></param>
@@ -247,6 +215,102 @@
                 return values;
             }
         }
+        
+        /// <summary>
+        /// 1347. Minimum Number of Steps to Make Two Strings Anagram
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="t"></param>
+        /// <returns>Return the minimum number of steps to make t an anagram of s.
+        /// An Anagram of a string is a string that contains the same characters with a different (or the same) ordering.</returns>
+        public static int MinSteps(string s, string t)
+        {
+            #region O(n) slower, but general
+
+            // var steps = 0;
+            //
+            // var map = new Dictionary<char, int>(); // char : count
+            // var len = s.Length;
+            //
+            // for (var i = 0; i < len; i++)
+            // {
+            //     var sLetter = s[i];
+            //     map.TryAdd(sLetter, 0);
+            //     map[sLetter]++;
+            // }
+            //
+            // for (var i = 0; i < len; i++)
+            // {
+            //     var tLetter = t[i];
+            //     if (map.TryGetValue(tLetter, out var value))
+            //         map[tLetter] = --value;
+            // }
+            //
+            // steps = map.Values.Where(x => x > 0).Sum();
+            //
+            // return steps;
+
+            #endregion
+
+            #region O(n) quick, due to context
+
+            var arr1 = new int[26]; // 26 letters in English
+            var arr2 = new int[26];
+
+            for (var i = 0; i < s.Length; i++)
+            {
+                arr1[s[i] - 'a']++;
+                arr2[t[i] - 'a']++;
+            }
+
+            var cnt = 0;
+
+            for (var i = 0; i < 26; i++)
+            {
+                if (arr2[i] > arr1[i])
+                {
+                    cnt += arr2[i] - arr1[i];
+                }
+            }
+
+            return cnt;
+
+            #endregion
+            
+        }
+        
+        /// <summary>
+        /// 2385. Amount of Time for Binary Tree to Be Infected
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="start"></param>
+        /// <returns>Return the number of minutes needed for the entire tree to be infected.</returns>
+        public static int AmountOfTime(TreeNode root, int start)
+        {
+            var minutes = 0;
+            Dfs(root, start);
+            return minutes;
+
+            int Dfs(TreeNode? node, int start)
+            {
+                if (node == null) return 0;
+
+                var leftDepth = Dfs(node.left, start);
+                var rightDepth = Dfs(node.right, start);
+
+                if (node.val == start)
+                {
+                    minutes = Math.Max(leftDepth, rightDepth);
+                    return -1;
+                }
+                else if (leftDepth >= 0 && rightDepth >= 0)
+                    return Math.Max(leftDepth, rightDepth) + 1;
+
+                minutes = Math.Max(minutes, Math.Abs(leftDepth - rightDepth));
+                return Math.Min(leftDepth, rightDepth) - 1;
+            }
+        }
+        
 
         #endregion
 

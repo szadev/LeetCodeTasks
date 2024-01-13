@@ -84,5 +84,16 @@ namespace Daily.Tests
             
             Assert.Equal(expected, res);
         }
+
+        [InlineData("bab","aba",1)]
+        [InlineData("leetcode","practice",5)]
+        [InlineData("anagram","mangaar",0)]
+        [Theory]
+        public void MinSteps_Test(string s, string t, int expected)
+        {
+            var res = Solution.MinSteps(s, t);
+            
+            Assert.Equal(expected, res);
+        }
     }
 }
