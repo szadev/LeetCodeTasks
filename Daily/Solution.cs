@@ -278,7 +278,57 @@
             #endregion
             
         }
-        
+
+        /// <summary>
+        /// 1657. Determine if Two Strings Are Close
+        /// </summary>
+        /// <param name="word1">only lowercase English letters</param>
+        /// <param name="word2">only lowercase English letters</param>
+        /// <returns>Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise.
+        /// Two strings are considered close if you can attain one from the other.</returns>
+        public static bool CloseStrings(string word1, string word2)
+        {
+            if (word1.Length != word2.Length)
+                return false;
+
+            var arr1 = new int[26];
+            var arr2 = new int[26];
+            var used = new bool[26];
+
+            for (var i = 0; i < word1.Length; i++)
+            {
+                arr1[word1[i] - 'a']++;
+                arr2[word2[i] - 'a']++;
+            }
+
+            for (var i = 0; i < 26; i++)
+            {
+                if (arr1[i] != 0 && arr2[i] is 0
+                    || arr2[i] != 0 && arr1[i] is 0)
+                    return false;
+
+                var found = false;
+
+                for (var j = 0; j < 26; j++)
+                {
+                    if (used[j])
+                        continue;
+
+                    if (arr2[j] == arr1[i])
+                    {
+                        used[j] = true;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                    return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// 2385. Amount of Time for Binary Tree to Be Infected
         /// </summary>
@@ -310,7 +360,6 @@
                 return Math.Min(leftDepth, rightDepth) - 1;
             }
         }
-        
 
         #endregion
 

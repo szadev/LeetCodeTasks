@@ -95,5 +95,18 @@ namespace Daily.Tests
             
             Assert.Equal(expected, res);
         }
+
+        [InlineData("abc", "bca", true)]
+        [InlineData("a", "aa", false)]
+        [InlineData("cabbba", "abbccc", true)]
+        [InlineData("uau", "ssx", false)]
+        [InlineData("abbzzca", "babzzcz", false)]
+        [Theory]
+        public void CloseStrings_Test(string word1, string word2, bool expected)
+        {
+            var res = Solution.CloseStrings(word1, word2);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
