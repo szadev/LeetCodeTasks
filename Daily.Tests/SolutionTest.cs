@@ -108,5 +108,48 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [MemberData(nameof(FindWinners_Data))]
+        [Theory]
+        public void FindWinners_Test(int[][] matches, IList<List<int>> expected)
+        {
+            var res = Solution.FindWinners(matches);
+            
+            Assert.Equal(expected, res);
+        }
+        
+        public static List<object[]> FindWinners_Data()
+        {
+            return
+            [
+                [
+                    new int[10][]
+                    {
+                        [1, 3], [2, 3], [3, 6],
+                        [5, 6], [5, 7], [4, 5],
+                        [4, 8], [4, 9], [10, 4],
+                        [10, 9]
+                    },
+                    new List<List<int>>
+                    {
+                        new() {1,2,10},
+                        new() {4,5,7,8},
+                    }
+                ],
+
+                [
+                    new int[4][]
+                    {
+                        [2,3],[1,3],
+                        [5,4],[6,4]
+                    },
+                    new List<List<int>>
+                    {
+                        new() {1,2,5,6},
+                        new()
+                    }
+                ],
+            ];
+        }
     }
 }

@@ -182,7 +182,7 @@
             // int[2] 0 - min, 1 - max
             int[] GetMaxMinValue(TreeNode node)
             {
-                var values = new int[2] {node.val,node.val};
+                var values = new[] { node.val,node.val };
 
                 if (node.left != null)
                 {
@@ -329,6 +329,50 @@
             return true;
         }
 
+        /// <summary>
+        /// 2225. Find Players With Zero or One Losses
+        /// </summary>
+        /// <param name="matches"></param>
+        /// <returns>Return a list answer of size 2 where:
+        /// answer[0] is a list of all players that have not lost any matches.
+        /// answer[1] is a list of all players that have lost exactly one match.
+        /// The values in the two lists are in increasing order.</returns>
+        public static IList<IList<int>> FindWinners(int[][] matches)
+        {
+            var ans = new List<IList<int>>
+            {
+                new List<int>(),
+                new List<int>()
+            };
+        
+            var looses = new SortedDictionary<int,int>(); // player : count
+        
+            foreach (var match in matches)
+            {
+                if (!looses.ContainsKey(match[0]))
+                    looses[match[0]] = 0;
+            
+                if (!looses.ContainsKey(match[1]))
+                    looses[match[1]] = 0;
+                looses[match[1]]++;
+            }
+
+            foreach (var loose in looses)
+            {
+                switch (loose.Value)
+                {
+                    case 0:
+                        ans[0].Add(loose.Key);
+                        break;
+                    case 1:
+                        ans[1].Add(loose.Key);
+                        break;
+                }
+            }
+
+            return ans;
+        }
+        
         /// <summary>
         /// 2385. Amount of Time for Binary Tree to Be Infected
         /// </summary>
