@@ -151,5 +151,19 @@ namespace Daily.Tests
                 ],
             ];
         }
+
+        [InlineData(new SetActions[7]
+        {
+            SetActions.Insert, SetActions.Remove, SetActions.Insert,
+            SetActions.GetRandom, SetActions.Remove, SetActions.Insert,
+            SetActions.GetRandom
+        }, new int[7] { 1,2,2,0,1,2,0 }, new object[7] {true, false, true, 2, true, false, 2})]
+        [Theory]
+        public void UniqueRandomizedSet_Test(SetActions[] actions, int[] values, object[] expected)
+        {
+            var res = Solution.UniqueRandomizedSet(actions, values);
+            
+            Assert.Equal(expected, res);
+        }
     }
 }

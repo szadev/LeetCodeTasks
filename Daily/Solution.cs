@@ -151,6 +151,32 @@
         #region Medium
 
         /// <summary>
+        /// 380. Insert Delete GetRandom O(1)
+        /// </summary>
+        /// <returns></returns>
+        public static object[] UniqueRandomizedSet(SetActions[] actions, int[] values)
+        {
+            var ans = new object[actions.Length];
+
+            var set = new RandomizedSet();
+
+            for (var i = 0; i < actions.Length; i++)
+            {
+                var action = actions[i];
+                var val = values[i];
+                ans[i] = action switch
+                {
+                    SetActions.Insert => set.Insert(val),
+                    SetActions.Remove => set.Remove(val),
+                    SetActions.GetRandom => set.GetRandom(),
+                    _ => ans[i]
+                };
+            }
+            
+            return ans;
+        }
+        
+        /// <summary>
         /// 1026. Maximum Difference Between Node and Ancestor
         /// </summary>
         /// <param name="root"></param>
