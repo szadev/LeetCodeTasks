@@ -125,6 +125,34 @@
 
             return sum;
         }
+        
+        /// <summary>
+        /// 1207. Unique Number of Occurrences
+        /// </summary>
+        /// <param name="arr">an array of integers</param>
+        /// <returns>Return true if the number of occurrences of each value
+        /// in the array is unique or false otherwise.</returns>
+        public static bool UniqueOccurrences(int[] arr)
+        {
+            var map = new Dictionary<int, int>(); // value : count
+
+            foreach (var t in arr)
+            {
+                map.TryAdd(t, 0);
+                map[t]++;
+            }
+
+            #region simple, but slower (79 ms, 42.2 MB)
+            //return map.Values.Count == map.Values.Distinct().Count();
+            #endregion
+
+            #region faster (67 ms, 42 MB)
+
+            var hash = new HashSet<int>();
+            return map.Values.All(v => hash.Add(v));
+            
+            #endregion
+        }
 
         /// <summary>
         /// 1704. Determine if String Halves Are Alike

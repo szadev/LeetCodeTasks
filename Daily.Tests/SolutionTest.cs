@@ -165,5 +165,16 @@ namespace Daily.Tests
             
             Assert.Equal(expected, res);
         }
+
+        [InlineData(new int[]{ 1,2,2,1,1,3 }, true)]
+        [InlineData(new int[]{ 1,2 }, false)]
+        [InlineData(new int[]{ -3,0,1,-3,1,1,1,-3,10,0 }, true)]
+        [Theory]
+        public void UniqueOccurrences_Test(int[] arr, bool expected)
+        {
+            var res = Solution.UniqueOccurrences(arr);
+            
+            Assert.Equal(expected, res);
+        }
     }
 }
