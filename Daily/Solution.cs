@@ -54,6 +54,49 @@
         }
 
         /// <summary>
+        /// 70. Climbing Stairs
+        /// </summary>
+        /// <param name="n">Steps to reach the top</param>
+        /// <returns>Each time 1 or 2 steps.
+        /// Return count of distinct ways to climb to the top.</returns>
+        public static int ClimbStairs(int n)
+        {
+            #region slower, allocation 
+
+            //if (n == 1)
+            //    return 1;
+
+            //var steps = new int[n];
+            //steps[n - 1] = 1;
+            //steps[n - 2] = 2;
+
+            //for (int i = n - 3; i >= 0; i--)
+            //{
+            //    steps[i] = steps[i + 1] + steps[i + 2];
+            //}
+
+            //return steps[0];
+
+            #endregion
+
+            #region faster, low allocation
+
+            var n1 = 1;
+            var n2 = 1;
+
+            for (int i = n - 1; i > 0; i--)
+            {
+                var temp = n2;
+                n2 += n1;
+                n1 = temp;
+            }
+
+            return n2;
+
+            #endregion
+        }
+
+        /// <summary>
         /// 872. Leaf-Similar Trees
         /// </summary>
         /// <param name="root1"></param>

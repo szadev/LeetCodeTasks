@@ -176,5 +176,20 @@ namespace Daily.Tests
             
             Assert.Equal(expected, res);
         }
+
+        [InlineData(1,1)]
+        [InlineData(2,2)]
+        [InlineData(3,3)]
+        [InlineData(5,8)]
+        [InlineData(10, 89)]
+        [InlineData(20, 10946)]
+        [InlineData(45, 1836311903)]
+        [Theory]
+        public void ClimbStairs_Test(int n, int expected)
+        {
+            var res = Solution.ClimbStairs(n);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
