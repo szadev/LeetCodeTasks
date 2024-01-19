@@ -246,7 +246,53 @@
             
             return ans;
         }
-        
+
+        /// <summary>
+        /// 931. Minimum Falling Path Sum
+        /// </summary>
+        /// <param name="matrix">n x n array of integers</param>
+        /// <returns>Return the minimum sum of any falling path through matrix.
+        /// A falling path starts at any element in the first row and chooses the element in the next row 
+        /// that is either directly below or diagonally left/right.</returns>
+        public static int MinFallingPathSum(int[][] matrix)
+        {
+            var len = matrix.Length;
+
+            if (len is 1)
+            {
+                return matrix[0].Min();
+            }
+
+            var fullmin = 100 * 100;
+            for (var i = len-2; i>=0; i--)
+            {
+                var row = matrix[i];
+                var downRow = matrix[i+1];
+
+                for (var j = 0; j < len; j++)
+                {
+                    var min = 100 * (len - 1 - i);
+                    for (var k = j - 1; k <= j + 1 && k < len; k++)
+                    {
+                        if (k < 0)
+                            continue;
+                        if (downRow[k] < min)
+                        {
+                            min = downRow[k];
+                        }
+                    }
+                    row[j] += min;
+
+                    if (i == 0 && fullmin > row[j])
+                    {
+                        fullmin = row[j];
+                    }
+                }
+            }
+
+            return fullmin;
+        }
+
         /// <summary>
         /// 1026. Maximum Difference Between Node and Ancestor
         /// </summary>

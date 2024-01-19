@@ -191,5 +191,43 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [MemberData(nameof(MinFallingPathSum_Data))]
+        [Theory]
+        public void MinFallingPathSum_Test(int[][] matrix, int expected)
+        {
+            var res = Solution.MinFallingPathSum(matrix);
+
+            Assert.Equal(expected, res);
+        }
+
+        public static List<object[]> MinFallingPathSum_Data()
+        {
+            return
+            [
+                [
+                    new int[1][]
+                    {
+                        [-48]
+                    },
+                    -48
+                ],
+                [
+                    new int[3][]
+                    {
+                        [2,1,3],[6,5,4],[7,8,9]
+                    },
+                    13
+                ],
+
+                [
+                    new int[2][]
+                    {
+                        [-19,57],[-40,-5]
+                    },
+                    -59
+                ],
+            ];
+        }
     }
 }
