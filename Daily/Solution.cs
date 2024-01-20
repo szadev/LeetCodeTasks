@@ -248,6 +248,31 @@
         }
 
         /// <summary>
+        /// 907. Sum of Subarray Minimums
+        /// </summary>
+        /// <param name="arr">Array of integers from 1 to 3 * 10^4</param>
+        /// <returns>Returns the sum of min(b), where b ranges over every (contiguous) subarray of arr. 
+        /// Since the answer may be large, return the answer modulo 10^9 + 7.</returns>
+        public static int SumSubarrayMins(int[] arr)
+        {
+            // O(n^2). For O(n) use increasing monotonic stack
+            var max = 1000000007;
+            var minSum = 0;
+
+            for (var i = arr.Length - 1; i >= 0; i--)
+            {
+                var min = Int32.MaxValue;
+                for (int j = i; j < arr.Length; j++)
+                {
+                    min = Math.Min(min, arr[j]);
+                    minSum += min;
+                }
+                minSum %= max;
+            }
+            return minSum;
+        }
+
+        /// <summary>
         /// 931. Minimum Falling Path Sum
         /// </summary>
         /// <param name="matrix">n x n array of integers</param>
