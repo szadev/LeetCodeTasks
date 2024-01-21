@@ -216,10 +216,33 @@
             }
             return number is 0;
         }
-        
+
         #endregion
 
         #region Medium
+
+        /// <summary>
+        /// 198. House Robber
+        /// </summary>
+        /// <param name="nums">Amount of money of each house</param>
+        /// <returns>Returns the maximum amount of money you can rob tonight without alerting the police.
+        /// It will automatically contact the police if two adjacent houses were broken into on the same night.</returns>
+        public static int Rob(int[] nums)
+        {
+            // https://leetcode.com/problems/house-robber/solutions/156523/From-good-to-great.-How-to-approach-most-of-DP-problems/
+            if (nums.Length == 0) 
+                return 0;
+
+            var prev1 = 0;
+            var prev2 = 0;
+            foreach (var num in nums)
+            {
+                var tmp = prev1;
+                prev1 = Math.Max(prev2 + num, prev1);
+                prev2 = tmp;
+            }
+            return prev1;
+        }
 
         /// <summary>
         /// 380. Insert Delete GetRandom O(1)

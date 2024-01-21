@@ -240,5 +240,15 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [InlineData(new int[4] { 1, 2, 3, 1 }, 4)]
+        [InlineData(new int[5] { 2, 7, 9, 3, 1 }, 12)]
+        [Theory]
+        public void Rob_Test(int[] nums, int expected)
+        {
+            var res = Solution.Rob(nums);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
