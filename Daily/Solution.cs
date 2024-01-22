@@ -97,6 +97,36 @@
         }
 
         /// <summary>
+        /// 645. Set Mismatch
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int[] FindErrorNums(int[] nums)
+        {
+            var ans = new int[2];
+            var numsCount = new int[nums.Length + 1];
+
+            for (int i = 0; i < nums.Length; i++ )
+            {
+                numsCount[nums[i]]++;
+            }
+
+            for (int i = 0; i < numsCount.Length; i++)
+            {
+                if (numsCount[i] == 0)
+                {
+                    ans[1] = i;
+                }
+                else if (numsCount[i] == 2)
+                {
+                    ans[0] = i;
+                }
+            }
+
+            return ans;
+        }
+
+        /// <summary>
         /// 872. Leaf-Similar Trees
         /// </summary>
         /// <param name="root1"></param>

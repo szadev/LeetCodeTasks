@@ -250,5 +250,16 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [InlineData(new int[4] { 1,2,2,4 }, new int[2] { 2,3 })]
+        [InlineData(new int[2] { 1,1 }, new int[2] { 1,2 })]
+        [InlineData(new int[2] { 2, 2 }, new int[2] { 2,1 })]
+        [Theory]
+        public void FindErrorNums_Test(int[] nums, int[] expected)
+        {
+            var res = Solution.FindErrorNums(nums);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
