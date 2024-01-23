@@ -261,5 +261,18 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [InlineData(new string[3] { "un", "iq", "ue" }, 4)]
+        [InlineData(new string[4] { "cha", "r", "act", "ers" }, 6)]
+        [InlineData(new string[1] { "abcdefghijklmnopqrstuvwxyz" }, 26)]
+        [InlineData(new string[2] { "aa", "bb" }, 0)]
+        [InlineData(new string[5] { "a", "abc", "d", "de", "def" }, 6)]
+        [Theory]
+        public void MaxLength_Test(string[] arr, int excpected)
+        {
+            var res = Solution.MaxLength(arr);
+
+            Assert.Equal(excpected, res);
+        }
     }
 }

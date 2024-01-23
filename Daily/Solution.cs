@@ -436,7 +436,30 @@
                 return values;
             }
         }
-        
+
+        /// <summary>
+        /// 1239. Maximum Length of a Concatenated String with Unique Characters
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns>Returns the maximum possible length of string 
+        /// that formed by the concatenation of a subsequence of arr that has unique characters.</returns>
+        public static int MaxLength(IList<string> arr)
+        {
+            return MaxLength(arr, 0);
+
+            static int MaxLength(IList<string> arr, int i = 0, string s = "")
+            {
+                if (s.Distinct().Count() < s.Length) return 0;
+
+                if (arr.Count == i) return s.Length;
+
+                return Math.Max(
+                    MaxLength(arr, i + 1, s),
+                    MaxLength(arr, i + 1, s + arr[i])
+                );
+            }
+        }
+
         /// <summary>
         /// 1347. Minimum Number of Steps to Make Two Strings Anagram
         /// </summary>
