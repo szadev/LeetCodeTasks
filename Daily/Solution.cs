@@ -524,6 +524,41 @@
         }
 
         /// <summary>
+        /// 1457. Pseudo-Palindromic Paths in a Binary Tree
+        /// </summary>
+        /// <param name="root">a binary tree where node values are digits from 1 to 9</param>
+        /// <returns>the number of pseudo-palindromic paths going from the root node to leaf nodes.</returns>
+        public static int PseudoPalindromicPaths (TreeNode root)
+        {
+            return Count(root, new int[10]);
+
+            int Count(TreeNode? node, int[] count)
+            {
+                if (node is null)
+                    return 0;
+
+                count[node.val]++;
+                if (node.left is null && node.right is null)
+                {
+                    var oddCount = 0;
+                    for (var i = 1; i <= 9; i++)
+                    {
+                        if (count[i] % 2 != 0)
+                            oddCount++;
+                    }
+                    count[node.val]--;
+                    return oddCount > 1 ? 0 : 1;
+                }
+
+                var left = Count(node.left, count);
+                var right = Count(node.right, count);
+                
+                count[node.val]--;
+                return left + right;
+            }
+        }
+        
+        /// <summary>
         /// 1657. Determine if Two Strings Are Close
         /// </summary>
         /// <param name="word1">only lowercase English letters</param>

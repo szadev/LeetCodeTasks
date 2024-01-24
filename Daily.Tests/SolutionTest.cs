@@ -274,5 +274,18 @@ namespace Daily.Tests
 
             Assert.Equal(excpected, res);
         }
+
+        [InlineData(new object?[] { 2,3,1,3,1,null,1 }, 2)]
+        [InlineData(new object?[] { 2,1,1,1,3,null,null,null,null,null,1 }, 1)]
+        [InlineData(new object?[] { 9 }, 1)]
+        [Theory]
+        public void PseudoPalindromicPaths_Test(object[] nums, int expected)
+        {
+            var root = Logic.GetTreeNode(nums);
+
+            var res = Solution.PseudoPalindromicPaths(root!);
+            
+            Assert.Equal(expected, res);
+        }
     }
 }
