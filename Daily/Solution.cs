@@ -438,6 +438,46 @@
         }
 
         /// <summary>
+        /// 1143. Longest Common Subsequence
+        /// </summary>
+        /// <param name="text1"></param>
+        /// <param name="text2"></param>
+        /// <returns>Returns the length of their longest common subsequence.
+        /// If there is no common subsequence, returns 0</returns>
+        public static int LongestCommonSubsequence(string text1, string text2)
+        {
+            if (text1.Length < text2.Length)
+                (text1, text2) = (text2, text1);
+
+            var arr = new int[text1.Length, text2.Length];
+            for (int i = 0; i < text1.Length; i++)
+            {
+                for (int j = 0; j < text2.Length; j++)
+                {
+                    arr[i, j] = -1;
+                }
+            }
+
+            return GetLongestSub(0, 0, 0);
+
+            int GetLongestSub(int i, int j, int sum)
+            {
+                if (i >= text1.Length || j >= text2.Length)
+                    return 0;
+
+                if (arr[i, j] > -1)
+                    return arr[i, j];
+
+                if (text1[i] == text2[j])
+                    arr[i, j] = sum + 1 + GetLongestSub(i + 1, j + 1, sum);
+                else
+                    arr[i, j] = Math.Max(GetLongestSub(i, j + 1, sum), GetLongestSub(i + 1, j, sum));
+
+                return arr[i, j];
+            }
+        }
+
+        /// <summary>
         /// 1239. Maximum Length of a Concatenated String with Unique Characters
         /// </summary>
         /// <param name="arr"></param>
@@ -528,11 +568,11 @@
         /// </summary>
         /// <param name="root">a binary tree where node values are digits from 1 to 9</param>
         /// <returns>the number of pseudo-palindromic paths going from the root node to leaf nodes.</returns>
-        public static int PseudoPalindromicPaths (TreeNode root)
+        public static int PseudoPalindromicPaths(TreeNode root)
         {
             return Count(root, new int[10]);
 
-            int Count(TreeNode? node, int[] count)
+            static int Count(TreeNode? node, int[] count)
             {
                 if (node is null)
                     return 0;

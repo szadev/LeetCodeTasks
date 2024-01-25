@@ -287,5 +287,17 @@ namespace Daily.Tests
             
             Assert.Equal(expected, res);
         }
+
+        [InlineData("abcde", "ace", 3)]
+        [InlineData("abc", "abc", 3)]
+        [InlineData("abc", "def",0)]
+        [InlineData("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq", 6)]
+        [Theory]
+        public void LongestCommonSubsequence_Test(string text1, string text2, int expected)
+        {
+            var res = Solution.LongestCommonSubsequence(text1, text2);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
