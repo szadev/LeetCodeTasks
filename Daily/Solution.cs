@@ -301,6 +301,58 @@
         }
 
         /// <summary>
+        /// 576. Out of Boundary Paths
+        /// </summary>
+        /// <param name="m">1 <= m <= 50</param>
+        /// <param name="n">1 <= n <= 50</param>
+        /// <param name="maxMove">0 <= maxMove <= 50</param>
+        /// <param name="startRow">0 <= startRow < m</param>
+        /// <param name="startColumn">0 <= startColumn < n</param>
+        /// <returns>Returns the number of paths to move the ball out of the grid boundary. 
+        /// Since the answer can be very large, returns it modulo 10^9 + 7</returns>
+        public static int FindPaths(int m, int n, int maxMove, int startRow, int startColumn)
+        {
+            if (maxMove == 0)
+                return 0;
+
+            var mod = 1_000_000_007;
+
+            var paths = new int[m,n, maxMove + 1];
+
+            for (var i = 0; i < m; i++)
+            {
+                for (var j = 0; j < n; j++)
+                {
+                    for (var k = 0; k < maxMove + 1; k++)
+                    {
+                        paths[i,j,k] = -1;
+                    }
+                }
+            }
+
+            return GetPathCount(startRow, startColumn, maxMove);
+
+            int GetPathCount(int row, int col, int remMove)
+            {
+                if (row < 0 || col < 0 || row == m || col == n)
+                    return 1;
+
+                if (remMove == 0)
+                    return 0;
+
+                if (paths[row, col, remMove] is -1)
+                {
+                    paths[row, col, remMove] = ((GetPathCount(row + 1, col, remMove - 1)
+                                                + GetPathCount(row, col + 1, remMove - 1)) % mod
+                                                + (GetPathCount(row - 1, col, remMove - 1)
+                                                + GetPathCount(row, col - 1, remMove - 1)) % mod) % mod;
+                }
+
+                return paths[row, col, remMove];
+            }
+        }
+
+        /// <summary>
         /// 907. Sum of Subarray Minimums
         /// </summary>
         /// <param name="arr">Array of integers from 1 to 3 * 10^4</param>

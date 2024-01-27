@@ -299,5 +299,16 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [InlineData(2,2,2,0,0,6)]
+        [InlineData(1,3,3,0,1,12)]
+        [InlineData(8,50,23,5,26, 914783380)]
+        [Theory]
+        public void FindPaths_Test(int m, int n, int maxMove, int startRow, int startColumn, int expected)
+        {
+            var res = Solution.FindPaths(m, n, maxMove, startRow, startColumn);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
