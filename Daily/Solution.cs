@@ -861,6 +861,53 @@
             return subseqs;
         }
 
+        /// <summary>
+        /// 629. K Inverse Pairs Array
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="k"></param>
+        /// <returns>Returns the number of different arrays consist of numbers from 1 to n such that there are exactly k inverse pairs.</returns>
+        public static int KInversePairs(int n, int k)
+        {
+            // https://www.youtube.com/watch?v=PMyL3MPhC00
+            var mod = 1_000_000_007;
+            var dp = new int[n+1,k+1];
+
+            for (int i = 0; i < n+1; i++)
+            {
+                for (int j = 0; j < k+1; j++)
+                {
+                    dp[i, j] = -1;
+                }
+            }
+
+            return Count(n, k);
+
+            int Count(int n, int k)
+            {
+                if (n == 1)
+                {
+                    if (k == 0)
+                        return 1;
+                    return 0;
+                }
+
+                if (k < 0)
+                    return 0;
+
+                if (dp[n, k] != -1)
+                    return dp[n, k];
+
+                dp[n, k] = (Count(n-1, k) + Count(n, k-1)) % mod;
+                dp[n, k] = (dp[n, k] - Count(n-1, k-n)) % mod;
+
+                if (dp[n, k] < 0)
+                    dp[n, k] += mod;
+
+                return dp[n, k];
+            }
+        }
+
         #endregion
 
     }

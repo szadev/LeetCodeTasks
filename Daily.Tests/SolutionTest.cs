@@ -310,5 +310,15 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [InlineData(3,0,1)]
+        [InlineData(3,1,2)]
+        [Theory]
+        public void KInversePairs_Test(int n, int k, int expected)
+        {
+            var res = Solution.KInversePairs(n, k);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
