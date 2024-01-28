@@ -15,7 +15,7 @@ namespace Daily.Tests
 
 
         [InlineData(new object?[] { 10, 5, 15, 3, 7, null, 18 }, 7, 15, 32)]
-        [InlineData(new object?[] { 10, 5, 15, 3, 7, 13, 18, 1, null, 6}, 6, 10, 23)]
+        [InlineData(new object?[] { 10, 5, 15, 3, 7, 13, 18, 1, null, 6 }, 6, 10, 23)]
         [Theory]
         public void RangeSumBST_Test(object[] nums, int low, int high, int expected)
         {
@@ -70,29 +70,29 @@ namespace Daily.Tests
         public void HalvesAreAlike_Test(string s, bool expected)
         {
             var res = Solution.HalvesAreAlike(s);
-            
+
             Assert.Equal(expected, res);
         }
 
-        [InlineData(new object?[] { 8,3,10,1,6,null,14,null,null,4,7,13 }, 7)]
-        [InlineData(new object?[] { 1,null,2,null,0,3}, 3)]
+        [InlineData(new object?[] { 8, 3, 10, 1, 6, null, 14, null, null, 4, 7, 13 }, 7)]
+        [InlineData(new object?[] { 1, null, 2, null, 0, 3 }, 3)]
         [Theory]
         public void MaxAncestorDiff_Test(object[] nums, int expected)
         {
             var root = Logic.GetTreeNode(nums);
             var res = Solution.MaxAncestorDiff(root!);
-            
+
             Assert.Equal(expected, res);
         }
 
-        [InlineData("bab","aba",1)]
-        [InlineData("leetcode","practice",5)]
-        [InlineData("anagram","mangaar",0)]
+        [InlineData("bab", "aba", 1)]
+        [InlineData("leetcode", "practice", 5)]
+        [InlineData("anagram", "mangaar", 0)]
         [Theory]
         public void MinSteps_Test(string s, string t, int expected)
         {
             var res = Solution.MinSteps(s, t);
-            
+
             Assert.Equal(expected, res);
         }
 
@@ -114,10 +114,10 @@ namespace Daily.Tests
         public void FindWinners_Test(int[][] matches, IList<List<int>> expected)
         {
             var res = Solution.FindWinners(matches);
-            
+
             Assert.Equal(expected, res);
         }
-        
+
         public static List<object[]> FindWinners_Data()
         {
             return
@@ -157,30 +157,30 @@ namespace Daily.Tests
             SetActions.Insert, SetActions.Remove, SetActions.Insert,
             SetActions.GetRandom, SetActions.Remove, SetActions.Insert,
             SetActions.GetRandom
-        }, new int[7] { 1,2,2,0,1,2,0 }, new object[7] {true, false, true, 2, true, false, 2})]
+        }, new int[7] { 1, 2, 2, 0, 1, 2, 0 }, new object[7] { true, false, true, 2, true, false, 2 })]
         [Theory]
         public void UniqueRandomizedSet_Test(SetActions[] actions, int[] values, object[] expected)
         {
             var res = Solution.UniqueRandomizedSet(actions, values);
-            
+
             Assert.Equal(expected, res);
         }
 
-        [InlineData(new int[]{ 1,2,2,1,1,3 }, true)]
-        [InlineData(new int[]{ 1,2 }, false)]
-        [InlineData(new int[]{ -3,0,1,-3,1,1,1,-3,10,0 }, true)]
+        [InlineData(new int[] { 1, 2, 2, 1, 1, 3 }, true)]
+        [InlineData(new int[] { 1, 2 }, false)]
+        [InlineData(new int[] { -3, 0, 1, -3, 1, 1, 1, -3, 10, 0 }, true)]
         [Theory]
         public void UniqueOccurrences_Test(int[] arr, bool expected)
         {
             var res = Solution.UniqueOccurrences(arr);
-            
+
             Assert.Equal(expected, res);
         }
 
-        [InlineData(1,1)]
-        [InlineData(2,2)]
-        [InlineData(3,3)]
-        [InlineData(5,8)]
+        [InlineData(1, 1)]
+        [InlineData(2, 2)]
+        [InlineData(3, 3)]
+        [InlineData(5, 8)]
         [InlineData(10, 89)]
         [InlineData(20, 10946)]
         [InlineData(45, 1836311903)]
@@ -251,9 +251,9 @@ namespace Daily.Tests
             Assert.Equal(expected, res);
         }
 
-        [InlineData(new int[4] { 1,2,2,4 }, new int[2] { 2,3 })]
-        [InlineData(new int[2] { 1,1 }, new int[2] { 1,2 })]
-        [InlineData(new int[2] { 2, 2 }, new int[2] { 2,1 })]
+        [InlineData(new int[4] { 1, 2, 2, 4 }, new int[2] { 2, 3 })]
+        [InlineData(new int[2] { 1, 1 }, new int[2] { 1, 2 })]
+        [InlineData(new int[2] { 2, 2 }, new int[2] { 2, 1 })]
         [Theory]
         public void FindErrorNums_Test(int[] nums, int[] expected)
         {
@@ -275,8 +275,8 @@ namespace Daily.Tests
             Assert.Equal(excpected, res);
         }
 
-        [InlineData(new object?[] { 2,3,1,3,1,null,1 }, 2)]
-        [InlineData(new object?[] { 2,1,1,1,3,null,null,null,null,null,1 }, 1)]
+        [InlineData(new object?[] { 2, 3, 1, 3, 1, null, 1 }, 2)]
+        [InlineData(new object?[] { 2, 1, 1, 1, 3, null, null, null, null, null, 1 }, 1)]
         [InlineData(new object?[] { 9 }, 1)]
         [Theory]
         public void PseudoPalindromicPaths_Test(object[] nums, int expected)
@@ -284,13 +284,13 @@ namespace Daily.Tests
             var root = Logic.GetTreeNode(nums);
 
             var res = Solution.PseudoPalindromicPaths(root!);
-            
+
             Assert.Equal(expected, res);
         }
 
         [InlineData("abcde", "ace", 3)]
         [InlineData("abc", "abc", 3)]
-        [InlineData("abc", "def",0)]
+        [InlineData("abc", "def", 0)]
         [InlineData("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq", 6)]
         [Theory]
         public void LongestCommonSubsequence_Test(string text1, string text2, int expected)
@@ -300,9 +300,9 @@ namespace Daily.Tests
             Assert.Equal(expected, res);
         }
 
-        [InlineData(2,2,2,0,0,6)]
-        [InlineData(1,3,3,0,1,12)]
-        [InlineData(8,50,23,5,26, 914783380)]
+        [InlineData(2, 2, 2, 0, 0, 6)]
+        [InlineData(1, 3, 3, 0, 1, 12)]
+        [InlineData(8, 50, 23, 5, 26, 914783380)]
         [Theory]
         public void FindPaths_Test(int m, int n, int maxMove, int startRow, int startColumn, int expected)
         {
@@ -311,14 +311,57 @@ namespace Daily.Tests
             Assert.Equal(expected, res);
         }
 
-        [InlineData(3,0,1)]
-        [InlineData(3,1,2)]
+        [InlineData(3, 0, 1)]
+        [InlineData(3, 1, 2)]
         [Theory]
         public void KInversePairs_Test(int n, int k, int expected)
         {
             var res = Solution.KInversePairs(n, k);
 
             Assert.Equal(expected, res);
+        }
+
+        [MemberData(nameof(NumSubmatrixSumTarget_Data))]
+        [Theory]
+        public void NumSubmatrixSumTarget_Test(int[][] matrix, int target, int expected)
+        {
+            var res = Solution.NumSubmatrixSumTarget(matrix, target);
+
+            Assert.Equal(expected, res);
+        }
+
+        public static List<object[]> NumSubmatrixSumTarget_Data()
+        {
+            return
+            [
+                [
+                    new int[3][]
+                    {
+                        [0, 1, 0],
+                        [1, 1, 1],
+                        [0, 1, 0]
+                    }, 
+                    0, 
+                    4
+                ],
+                [
+                    new int[2][]
+                    {
+                        [1,-1],
+                        [-1,1]
+                    },
+                    0,
+                    5
+                ],
+                [
+                    new int[1][]
+                    {
+                        [904]
+                    },
+                    0,
+                    0
+                ],
+            ];
         }
     }
 }

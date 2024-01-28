@@ -780,45 +780,6 @@
 
         #region Hard
 
-        /// <summary>
-        /// 1235. Maximum Profit in Job Scheduling
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <param name="profit"></param>
-        /// <returns></returns>
-        public static int JobScheduling(int[] startTime, int[] endTime, int[] profit)
-        {
-            var max = 0;
-
-            var jobs = startTime
-            .Select((_, i) => new Job() { Start = startTime[i], End = endTime[i], Profit = profit[i] })
-            .OrderBy(job => job.Start)
-            .ToArray();
-
-            var maxByStartDate = new int[jobs.Length];
-
-            for (var i = jobs.Length - 1; i >= 0; i--)
-            {
-                maxByStartDate[i] = jobs[i].Profit;
-
-                var localMax = 0;
-                for (var j = i + 1; j < jobs.Length; j++)
-                {
-                    if (jobs[j].Start >= jobs[i].End && localMax < maxByStartDate[j])
-                    {
-                        localMax = maxByStartDate[j];
-                    }
-                }
-
-                maxByStartDate[i] += localMax;
-
-                if (max < maxByStartDate[i])
-                    max = maxByStartDate[i];
-            }
-
-            return max;
-        }
 
         /// <summary>
         /// 446. Arithmetic Slices II - Subsequence
@@ -906,6 +867,95 @@
 
                 return dp[n, k];
             }
+        }
+
+        /// <summary>
+        /// 1074. Number of Submatrices That Sum to Target
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int NumSubmatrixSumTarget(int[][] matrix, int target)
+        {
+            // https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/solutions/2300306/c-detailed-explained-solution-with-workflow
+            for (var i = 0; i < matrix.Length; i++)
+            {
+                for (var j = 1; j < matrix[0].Length; j++)
+                {
+                    matrix[i][j] += matrix[i][j - 1];
+                }
+            }
+
+            var counter = 0;
+            for (var col1 = 0; col1 < matrix[0].Length; col1++)
+            {
+                for (var col2 = col1; col2 < matrix[0].Length; col2++)
+                {
+
+                    var sum = 0;
+                    var records = new Dictionary<int, int>();
+                    records[0] = 1;
+
+                    for (var row = 0; row < matrix.Length; row++)
+                    {
+
+                        sum += matrix[row][col2] - (col1 > 0 ? matrix[row][col1 - 1] : 0);
+                        var prefixSum = sum - target;
+
+                        if (records.ContainsKey(prefixSum))
+                        {
+                            counter += records[prefixSum];
+                        }
+                        if (records.ContainsKey(sum))
+                            records[sum] += 1;
+                        else
+                            records[sum] = 1;
+
+                    }
+                }
+            }
+
+            return counter;
+        }
+
+        /// <summary>
+        /// 1235. Maximum Profit in Job Scheduling
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="profit"></param>
+        /// <returns></returns>
+        public static int JobScheduling(int[] startTime, int[] endTime, int[] profit)
+        {
+            var max = 0;
+
+            var jobs = startTime
+            .Select((_, i) => new Job() { Start = startTime[i], End = endTime[i], Profit = profit[i] })
+            .OrderBy(job => job.Start)
+            .ToArray();
+
+            var maxByStartDate = new int[jobs.Length];
+
+            for (var i = jobs.Length - 1; i >= 0; i--)
+            {
+                maxByStartDate[i] = jobs[i].Profit;
+
+                var localMax = 0;
+                for (var j = i + 1; j < jobs.Length; j++)
+                {
+                    if (jobs[j].Start >= jobs[i].End && localMax < maxByStartDate[j])
+                    {
+                        localMax = maxByStartDate[j];
+                    }
+                }
+
+                maxByStartDate[i] += localMax;
+
+                if (max < maxByStartDate[i])
+                    max = maxByStartDate[i];
+            }
+
+            return max;
         }
 
         #endregion
