@@ -97,6 +97,40 @@
         }
 
         /// <summary>
+        /// 232. Implement Queue using Stacks
+        /// </summary>
+        /// <param name="actions"></param>
+        /// <param name="values"></param>
+        /// <returns>Implements a first in first out (FIFO) queue using only two stacks.</returns>
+        public static object?[] QueueUsingStacks(StackActions[] actions, int[] values)
+        {
+            var ans = new object?[actions.Length];
+
+            var queue = new MyQueue();
+
+            for (var i = 0; i < actions.Length; i++)
+            {
+                var action = actions[i];
+                var val = values[i];
+                ans[i] = action switch
+                {
+                    StackActions.Push => Push(val),
+                    StackActions.Pop => queue.Pop(),
+                    StackActions.Peek => queue.Peek(),
+                    StackActions.Empty => queue.Empty(),
+                    _ => ans[i]
+                };
+            }
+
+            return ans;
+            
+            bool? Push(int val){
+                queue.Push(val);
+                return null;
+            }
+        }
+
+        /// <summary>
         /// 645. Set Mismatch
         /// </summary>
         /// <param name="nums"></param>

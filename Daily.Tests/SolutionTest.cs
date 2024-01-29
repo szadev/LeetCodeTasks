@@ -363,5 +363,18 @@ namespace Daily.Tests
                 ],
             ];
         }
+
+        [InlineData(new StackActions[5]
+        {
+            StackActions.Push, StackActions.Push, StackActions.Peek,
+            StackActions.Pop, StackActions.Empty
+        }, new int[5] { 1, 2, 0, 0, 0 }, new object?[5] { null, null, 1, 1, false })]
+        [Theory]
+        public void QueueUsingStacks_Test(StackActions[] actions, int[] values, object?[] expected)
+        {
+            var res = Solution.QueueUsingStacks(actions, values);
+
+            Assert.Equal(expected, res);
+        }
     }
 }

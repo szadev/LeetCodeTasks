@@ -68,4 +68,55 @@
             return _nums[_random.Next(_nums.Count)];
         }
     }
+
+    public enum StackActions
+    {
+        Push,
+        Pop,
+        Peek,
+        Empty
+    }
+
+    public class MyQueue
+    {
+        private readonly Stack<int> _rStack;
+        private readonly Stack<int> _wrStack;
+
+        public MyQueue()
+        {
+            _rStack = new Stack<int>();
+            _wrStack = new Stack<int>();
+        }
+
+        public void Push(int x) => _wrStack.Push(x);
+
+        public int Pop() => SwapAndReturnFirst(true);
+
+        public int Peek() => SwapAndReturnFirst(false);
+
+        public bool Empty() => _wrStack.Count == 0;
+
+        public int SwapAndReturnFirst(bool remove)
+        {
+            if (_wrStack.Count < 1)
+                throw new IndexOutOfRangeException();
+
+            while (_wrStack.Count > 1)
+            {
+                _rStack.Push(_wrStack.Pop());
+            }
+
+            int res = _wrStack.Pop();
+
+            if (!remove)
+                _rStack.Push(res);
+
+            while (_rStack.Count > 0)
+            {
+                _wrStack.Push(_rStack.Pop());
+            }
+
+            return res;
+        }
+    }
 }
