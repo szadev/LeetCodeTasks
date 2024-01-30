@@ -286,6 +286,52 @@
         #region Medium
 
         /// <summary>
+        /// 150. Evaluate Reverse Polish Notation
+        /// </summary>
+        /// <param name="tokens"></param>
+        /// <returns>Return an integer that represents the value of the expression.</returns>
+        public static int EvalRPN(string[] tokens)
+        {
+            var stack = new Stack<int>();
+
+            for (var i = 0; i < tokens.Length; i++)
+            {
+                switch (tokens[i])
+                {
+                    case "+":
+                        Eval((x, y) => x + y);
+                        break;
+                    case "-":
+                        Eval((x, y) => x - y);
+                        break;
+                    case "*":
+                        Eval((x, y) => x * y);
+                        break;
+                    case "/":
+                        Eval((x, y) => x / y);
+                        break;
+                    default:
+                        if (int.TryParse(tokens[i], out var val))
+                            stack.Push(val);
+                        break;
+                }
+            }
+
+            return stack.Peek();
+
+            void Eval(Func<int, int, int> action)
+            {
+                if (stack.Count > 1)
+                {
+                    var y = stack.Pop();
+                    var x = stack.Pop();
+
+                    stack.Push(action(x, y));
+                }
+            }
+        }
+
+        /// <summary>
         /// 198. House Robber
         /// </summary>
         /// <param name="nums">Amount of money of each house</param>

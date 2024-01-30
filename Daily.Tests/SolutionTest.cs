@@ -376,5 +376,16 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [InlineData(new string[] { "2", "1", "+", "3", "*" }, 9)]
+        [InlineData(new string[] { "4", "13", "5", "/", "+" }, 6)]
+        [InlineData(new string[] { "10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+" }, 22)]
+        [Theory]
+        public void EvalRPN_Test(string[] tokens, int expected)
+        {
+            var res = Solution.EvalRPN(tokens);
+
+            Assert.Equal(expected, res);
+        }
     }
 }
