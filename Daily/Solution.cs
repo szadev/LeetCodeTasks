@@ -1,4 +1,6 @@
-﻿namespace Daily
+﻿using System.Collections.Generic;
+
+namespace Daily
 {
     public static class Solution
     {
@@ -430,6 +432,32 @@
 
                 return paths[row, col, remMove];
             }
+        }
+
+        /// <summary>
+        /// 739. Daily Temperatures
+        /// </summary>
+        /// <param name="temperatures"></param>
+        /// <returns>Returns an array answer such that answer[i] is the number of days
+        /// you have to wait after the ith day to get a warmer temperature</returns>
+        public static int[] DailyTemperatures(int[] temperatures)
+        {
+            var n = temperatures.Length;
+            var result = new int[n];
+            var monoStack = new Stack<int>();
+
+            for (int i = n - 1; i >= 0; i--)
+            {
+                while (monoStack.Count > 0 && temperatures[i] >= temperatures[monoStack.Peek()])
+                {
+                    monoStack.Pop();
+                }
+
+                result[i] = monoStack.Count == 0 ? 0 : monoStack.Peek() - i;
+                monoStack.Push(i);
+            }
+
+            return result;
         }
 
         /// <summary>

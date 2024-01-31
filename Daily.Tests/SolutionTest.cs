@@ -2,6 +2,8 @@ namespace Daily.Tests
 {
     public class SolutionTest
     {
+        #region tested
+
         [InlineData(new int[] { 2, 4, 6, 8, 10 }, 7)]
         [InlineData(new int[] { 7, 7, 7, 7, 7 }, 16)]
         [InlineData(new int[] { 0, 2000000000, -294967296 }, 0)]
@@ -384,6 +386,20 @@ namespace Daily.Tests
         public void EvalRPN_Test(string[] tokens, int expected)
         {
             var res = Solution.EvalRPN(tokens);
+
+            Assert.Equal(expected, res);
+        }
+
+        #endregion
+
+        [InlineData(new int[] { 1 }, new int[] { 0 })]
+        [InlineData(new int[] { 73, 74, 75, 71, 69, 72, 76, 73 }, new int[] { 1, 1, 4, 2, 1, 1, 0, 0 })]
+        [InlineData(new int[] { 30, 40, 50, 60 }, new int[] { 1, 1, 1, 0 })]
+        [InlineData(new int[] { 30, 60, 90 }, new int[] { 1, 1, 0 })]
+        [Theory]
+        public void DailyTemperatures_Test(int[] temperatures, int[] expected)
+        {
+            var res = Solution.DailyTemperatures(temperatures);
 
             Assert.Equal(expected, res);
         }
