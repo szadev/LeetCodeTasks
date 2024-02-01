@@ -883,6 +883,30 @@ namespace Daily
                 return Math.Min(leftDepth, rightDepth) - 1;
             }
         }
+        
+        /// <summary>
+        /// 2966. Divide Array Into Arrays With Max Difference
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public static int[][] DivideArray(int[] nums, int k)
+        {
+            Array.Sort(nums);
+            var answ = new int[nums.Length/3][];
+            var j = 0;
+            for (var i = 0; i < nums.Length - 2; i+=3)
+            {
+                if (nums[i + 2] - nums[i]  > k)
+                {
+                    return Array.Empty<int[]>();
+                }
+
+                answ[j++] = [nums[i], nums[i + 1], nums[i + 2]];
+            }
+
+            return answ;
+        }
 
         #endregion
 

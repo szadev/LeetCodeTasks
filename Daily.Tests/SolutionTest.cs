@@ -403,5 +403,41 @@ namespace Daily.Tests
 
             Assert.Equal(expected, res);
         }
+
+        [MemberData(nameof(DivideArray_Data))]
+        [Theory]
+        public void DivideArray_Test(int[] nums, int k, int[][] expected)
+        {
+            var res = Solution.DivideArray(nums, k);
+            var test = new[] { new int[]{1,1,3} };
+            Assert.Equal(expected, res);
+        }
+
+        public static List<object[]> DivideArray_Data()
+        {
+            return
+            [
+                [
+                    new[] { 1,3,4,8,7,9,3,5,1 },
+                    2,
+                    new int[][]
+                    {
+                        [1,1,3],[3,4,5],[7,8,9]
+                    },
+                ],
+
+                [
+                    new[] { 1,3,3,2,7,3 },
+                    3,
+                    Array.Empty<int[]>()
+                ],
+                
+                [
+                    new[] { 15,13,12,13,12,14,12,2,3,13,12,14,14,13,5,12,12,2,13,2,2 },
+                    2,
+                    Array.Empty<int[]>()
+                ],
+            ];
+        }
     }
 }
