@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Daily
 {
@@ -658,6 +659,33 @@ namespace Daily
                     MaxLength(arr, i + 1, s + arr[i])
                 );
             }
+        }
+        
+        /// <summary>
+        /// 1291. Sequential Digits
+        /// </summary>
+        /// <param name="low"></param>
+        /// <param name="high"></param>
+        /// <returns></returns>
+        public static IList<int> SequentialDigits(int low, int high)
+        {
+            var result = new List<int>();
+            const string digits = "123456789";
+            var maxDigits = high.ToString().Length;
+
+            for (var length = 2; length <= maxDigits; length++) {
+                for (var i = 0; i <= digits.Length - length; i++) {
+                    var substring = digits.Substring(i, length);
+                    var num = int.Parse(substring);
+
+                    if (num >= low && num <= high) {
+                        result.Add(num);
+                    }
+                }
+            }
+
+            result.Sort();
+            return result;
         }
 
         /// <summary>

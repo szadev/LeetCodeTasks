@@ -439,5 +439,15 @@ namespace Daily.Tests
                 ],
             ];
         }
+
+        [InlineData(100,300, new int[] { 123,234 })]
+        [InlineData(1000,13000, new int[] { 1234,2345,3456,4567,5678,6789,12345 })]
+        [Theory]
+        public void SequentialDigits_Test(int low, int high, IList<int> expected)
+        {
+            var res = Solution.SequentialDigits(low, high);
+            
+            Assert.Equal(expected, res);
+        }
     }
 }
